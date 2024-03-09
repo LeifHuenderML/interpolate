@@ -85,3 +85,17 @@ I will review relevant literature to enhance our project strategy.
 - **Manhattan Distance** - In many ML applications, Euclidean distance is the metric of choice; for high-dimensional data, Manhattan is preferable because it yields more robust results.
 
 - Similarity-based metrics determine the most similar objects, with the highest values implying they live in closer neighborhoods.
+
+### A Machine Learning-Based Comparative Approach to Predict the Crop Yield Using Supervised Learning With Regression Models
+
+- the goal stated in their abstract it to develop a ml model that predicts farm production
+- they used supervised learning with six regression models
+- their random forest regressor outperformed all the other models
+- i think that this paper is out of date with the current modes of ml 
+- they say it is a multi dimensioanal reggresion issue
+- they also used openweather
+- they had an accurracy of:
+    - logistic regression 87.8% 
+    - naive-bayes was 91.6%
+    - random forsest was 92.8%
+- this paper was more of a comparative summary of what others have done to build and test ml models on yi
