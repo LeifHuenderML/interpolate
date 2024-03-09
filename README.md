@@ -11,6 +11,5 @@ interoplate comprises a suite of statistical and machine learning models, rangin
 ## Installation
 
 ## Authors
-Dr. Mary Everett
-Leif Huender (Research Intern)
+Dr. Mary Everett, Leif Huender (Research Intern)
 
