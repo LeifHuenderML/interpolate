@@ -58,12 +58,13 @@ I will review relevant literature to enhance our project strategy.
 
 ### Unanswered
 
-- If I am not mistaken, there is no data in America regarding malaria outbreaks.
+
 
 ### Answered
 
 - Is the microclimate data + malaria data + the yield data for the same locations? Answer: Yes, it is. The yield and malaria are going to be the output vector, and the input is going to be the microclimate data.
 - How much data are we trying to analyze? It seems to me that to build a strong predictive model, we will need much more data on yield and so on. Answer: More is better.
+- If I am not mistaken, there is no data in America regarding malaria outbreaks. :correct we are not doing malaria in the US we will find an area with a historical record of malaria and collect data from that area.
 
 ## Notes on Papers I Read
 
@@ -98,4 +99,4 @@ I will review relevant literature to enhance our project strategy.
     - logistic regression 87.8% 
     - naive-bayes was 91.6%
     - random forsest was 92.8%
-- this paper was more of a comparative summary of what others have done to build and test ml models on yi
+- this paper was more of a comparative summary of what others have done to build and test ml models on yield predictions
