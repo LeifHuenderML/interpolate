@@ -1,19 +1,6 @@
-<!-- # interoplate
-
-<img src="docs/images/iterpolate-logo.png" alt="interpolate logo" width="200">
-
-## Introduction
-
-interoplate is a research project developed through a collaboration between Dr. Everett and Leif Huender at the University of Idaho's Computer Science Division. The project's objective is to explore and analyze the characteristics and similarities between microclimates and their effects on crop yield and malaria outbreaks globally. Their research introduces a novel methodology employing high-dimensional temporal weather data to identify regions with similar microclimates. This method, leveraging machine learning techniques, marks a significant advance over traditional approaches by enhancing our understanding of both well-documented and lesser-known microclimates. It navigates challenges such as data sparsity and dimensionality through the use of similarity scoring metrics, Riemannian learning, and advanced transformer models. Unlike conventional methods that primarily focus on established microclimates, our approach also sheds light on previously underexplored areas. This improvement is not only needed for refining our understanding of microclimate intricacies but also expands the applicability of precision agriculture, enabling the prediction of agricultural outcomes in areas formerly considered data deficient. Our research analyzed data from four distinct microclimates using methods like Kullback-Leibler (KL) divergence and Riemann manifold scoring to identify similarities, seasonal variations, and long-term climate trends. We developed and validated predictive models based on transformer neural network technology to assess the impact of climatic variables on crop yields across different seasons and locations. The findings demonstrate that these models significantly enhance prediction accuracy in regions with similar microclimates, thus providing farmers in data-sparse areas with valuable insights to make informed agricultural decisions. This study features the potential of utilizing large datasets to revolutionize farming, offering new avenues for improving crop yields and farming practices, particularly in regions previously constrained by insufficient data. The implications of this research are profound, both for understanding the influence of microclimates on agriculture and for equipping regions with the necessary tools to boost agricultural productivity.
-
-## Installation
-
-## Authors
-Leif Huender (Undergraduate Research Fellow of INBRE)
-Dr. Everett (University of Idaho Compurter Science Division Researcher) -->
 # interoplate
 
-![interpolate logo](docs/images/interpolate-logo.png)
+<img src="docs/images/iterpolate-logo.png" alt="interpolate logo" width="200">
 
 ## Introduction
 
