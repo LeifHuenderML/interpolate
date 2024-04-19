@@ -209,7 +209,7 @@ class Similarity:
             print('==========================================================================')
 
 
-    def show_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores):
+    def show_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores):
         #display all similarity scores
         self.show_similarities(euclidean_scores, 'Euclidean')
         self.show_similarities(manhattan_scores, 'Manhattan')
@@ -217,6 +217,7 @@ class Similarity:
         self.show_similarities(spearman_scores, 'Spearman')
         self.show_similarities(kendall_tau_scores, 'Kendall Tau')
         self.show_similarities(cosine_scores, 'Cosine')    
+        self.show_similarities(kl_divergence_scores, 'KL Divergence')
     
     def show_all(self):
         #display all information of the dataframes
@@ -401,8 +402,23 @@ class Similarity:
                 dist_34 = cosine_similarity([self.df3[col].values], [self.df4[col].values])
 
                 cosine_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+
         return cosine_similarities
     
+    def calculate_kl_divergence(self):
+        kl_divergence_similariteies = {}
+        
+        for col in self.columns:
+            if col in self.numeric_columns:
+                dist_12 = scipy.stats.entropy(self.df1[col], self.df2[col])
+                dist_13 = scipy.stats.entropy(self.df1[col], self.df2[col])
+                dist_14 = scipy.stats.entropy(self.df1[col], self.df2[col])
+                dist_23 = scipy.stats.entropy(self.df1[col], self.df2[col])
+                dist_24 = scipy.stats.entropy(self.df1[col], self.df2[col])
+                dist_34 = scipy.stats.entropy(self.df1[col], self.df2[col])
+
+                kl_divergence_similariteies[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+        return kl_divergence_similariteies
 
     def run_all_similarity_calculations(self):
         #run all similarity calculations
@@ -412,8 +428,10 @@ class Similarity:
         spearman_scores = self.calculate_spearman()
         kendall_tau_scores = self.calculate_kendall_tau()
         cosine_scores = self.calculate_cosine()
+        kl_divergence_scores = self.calculate_kl_divergence()
 
-        return euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores
+        return euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores
+
 
 
     '''
@@ -422,7 +440,7 @@ class Similarity:
     ==========================================================================
     '''
     
-    def plot_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores):
+    def plot_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores):
         #plot all similarity scores
         _ = self.plot_similarities(euclidean_scores, 'Euclidean')
         _ = self.plot_similarities(manhattan_scores, 'Manhattan')
@@ -430,6 +448,7 @@ class Similarity:
         _ = self.plot_similarities(spearman_scores, 'Spearman')
         _ = self.plot_similarities(kendall_tau_scores, 'Kendall Tau')
         _ = self.plot_similarities(cosine_scores, 'Cosine')
+        _ = self.plot_similarities(kl_divergence_scores, 'KL Divergence')
 
 
     def plot_similarities(self, similarity_scores, similarity_type, show=True):
@@ -455,7 +474,7 @@ class Similarity:
         return similarity_df
 
 
-    def create_all_similarity_df(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores):
+    def create_all_similarity_df(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores):
         #create a dataframe for all similarity scores
         euclidean_df = self.create_df_from_dict(euclidean_scores)
         manhattan_df = self.create_df_from_dict(manhattan_scores)
@@ -463,11 +482,11 @@ class Similarity:
         spearman_df = self.create_df_from_dict(spearman_scores)
         kendall_tau_df = self.create_df_from_dict(kendall_tau_scores)
         cosine_df = self.create_df_from_dict(cosine_scores)
-        
+        kl_divergence_df = self.create_df_from_dict(kl_divergence_scores)
         kendall_tau_df = self.fix_kendall_tau_df(kendall_tau_df)
         cosine_df = self.fix_cosine_df(cosine_df)
 
-        return euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df
+        return euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df
     
          
     def create_new_column(self, df, column_name, column_label):
@@ -476,7 +495,7 @@ class Similarity:
         return df
     
 
-    def create_all_new_columns(self,euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df) :
+    def create_all_new_columns(self,euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df) :
         #create new columns for all similarity dataframes
         euclidean_df = self.create_new_column(euclidean_df, 'Similarity Type', 'Euclidean')
         manhattan_df = self.create_new_column(manhattan_df, 'Similarity Type', 'Euclidean')
@@ -484,13 +503,14 @@ class Similarity:
         spearman_df = self.create_new_column(spearman_df, 'Similarity Type', 'Euclidean')
         kendall_tau_df = self.create_new_column(kendall_tau_df, 'Similarity Type', 'Euclidean')
         cosine_df = self.create_new_column(cosine_df, 'Similarity Type', 'Euclidean')
+        kl_divergence_df = self.create_new_column(kl_divergence_df, 'Similarity Type', 'Euclidean')
 
-        return euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df
+        return euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df
     
 
-    def combine_all_dfs(self, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df):
+    def combine_all_dfs(self, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df):
         #combine all similarity dataframes into one
-        combined_df = pd.concat([euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df])
+        combined_df = pd.concat([euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df])
         return combined_df
     
 
@@ -550,19 +570,19 @@ class Similarity:
         
         self.save_metadata(metadata_folder_path)
 
-        euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores = self.run_all_similarity_calculations()
-        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df = self.create_all_similarity_df(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores)
+        euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores = self.run_all_similarity_calculations()
+        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df = self.create_all_similarity_df(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores)
        
-        self.save_all_heatmaps(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df,heatmaps_folder_path)
-        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df = self.create_all_new_columns(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df)
-        combined_df = self.combine_all_dfs(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df)
+        self.save_all_heatmaps(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df, heatmaps_folder_path)
+        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df = self.create_all_new_columns(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df)
+        combined_df = self.combine_all_dfs(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df)
         self.save_combined_df(combined_df, dataframes_folder_path)
-        self.save_all_similarities(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, dataframes_folder_path, text_folder_path)
+        self.save_all_similarities(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df,  dataframes_folder_path, text_folder_path)
 
         print('All files saved')
 
 
-    def save_all_heatmaps(self, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, heatmaps_folder_path):
+    def save_all_heatmaps(self, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df, heatmaps_folder_path):
         #save all heatmaps to a folder
         euclidiean_plt = self.plot_similarities(euclidean_df, 'Euclidean', show=False)
         euclidiean_plt.savefig(heatmaps_folder_path + 'euclidean_heatmap.png')
@@ -576,9 +596,11 @@ class Similarity:
         kendall_tau_plt.savefig(heatmaps_folder_path + 'kendall_tau_heatmap.png')
         cosine_plt = self.plot_similarities(cosine_df, 'Cosine', show=False)    
         cosine_plt.savefig(heatmaps_folder_path + 'cosine_heatmap.png')
+        kl_divergence_df = self.plot_similarities(kl_divergence_df, 'KL Divergence', show=False)
+        kl_divergence_df.savefig(heatmaps_folder_path + 'kl_divergence_heatmap.png')
 
 
-    def save_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, dataframes_folder_path, text_folder_path):
+    def save_all_similarities(self, euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df, dataframes_folder_path, text_folder_path):
         #save all similarity scores to a folder
         euclidean_df.to_csv(dataframes_folder_path + 'euclidean_df.csv')
         manhattan_df.to_csv(dataframes_folder_path + 'manhattan_df.csv')
@@ -586,6 +608,7 @@ class Similarity:
         spearman_df.to_csv(dataframes_folder_path + 'spearman_df.csv')
         kendall_tau_df.to_csv(dataframes_folder_path + 'kendall_tau_df.csv')
         cosine_df.to_csv(dataframes_folder_path + 'cosine_df.csv')
+        kl_divergence_df.to_csv(dataframes_folder_path + 'kl_divergence_df.csv')
 
         self.write_dict_to_file(text_folder_path + 'euclidean.txt', euclidean_scores)
         self.write_dict_to_file(text_folder_path + 'manhattan.txt', manhattan_scores)
@@ -593,6 +616,7 @@ class Similarity:
         self.write_dict_to_file(text_folder_path + 'spearman.txt', spearman_scores)
         self.write_dict_to_file(text_folder_path + 'kendall_tau.txt', kendall_tau_scores)
         self.write_dict_to_file(text_folder_path + 'cosine.txt', cosine_scores)
+        self.write_dict_to_file(text_folder_path + 'kl_divergence.txt', kl_divergence_scores)
 
 
     '''
@@ -603,11 +627,15 @@ class Similarity:
     
     def run_all_similarity_functions(self):
         #run all the similarity functions
-        euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores = self.run_all_similarity_calculations()
-        self.show_all_similarities(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores)
-        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df = self.create_all_similarity_df(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores)
-        self.plot_all_similarities(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df)
-        return euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df
+        euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores = self.run_all_similarity_calculations()
+        self.show_all_similarities(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores)
+        euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df = self.create_all_similarity_df(euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, kl_divergence_scores)
+        print(f'kl divergence shape: {kl_divergence_df.shape}')
+        print(f'cosine shape: {cosine_df.shape}')
+        print(kl_divergence_df.head())
+        print(cosine_df.head())
+        self.plot_all_similarities(euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df)
+        return euclidean_scores, manhattan_scores, pearson_scores, spearman_scores, kendall_tau_scores, cosine_scores, euclidean_df, manhattan_df, pearson_df, spearman_df, kendall_tau_df, cosine_df, kl_divergence_df
 
 
     def write_dict_to_file(self, file_path, dictionary):
