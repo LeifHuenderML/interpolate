@@ -37,6 +37,8 @@ from scipy import stats
 import seaborn as sns
 import os
 from collections import namedtuple
+from data_manipulation.df_filter import DF_Filter
+
 
 simlilarity_scores = namedtuple('similarity_scores', ['euclidean_scores', 'manhattan_scores', 'pearson_scores', 'spearman_scores', 'kendall_tau_scores', 'cosine_scores', 'kl_divergence_scores'])
 similarity_dataframes = namedtuple('similarity_dataframes', ['euclidean_df', 'manhattan_df', 'pearson_df', 'spearman_df', 'kendall_tau_df', 'cosine_df', 'kl_divergence_df'])
@@ -129,6 +131,7 @@ class Similarity:
         self.columns = df1.columns
         self.scores = simlilarity_scores(*self.run_all_similarity_calculations())
         self.scores_df = self.create_all_similarity_df()
+        self.filter = DF_Filter()
 
 
     '''
@@ -424,6 +427,11 @@ class Similarity:
 
                 kl_divergence_similariteies[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
         return kl_divergence_similariteies
+    
+
+        self.scores = simlilarity_scores(*self.run_all_similarity_calculations())
+        self.scores_df = self.create_all_similarity_df()
+        return self.scores, self.scores_df
 
     def run_all_similarity_calculations(self):
         #run all similarity calculations
