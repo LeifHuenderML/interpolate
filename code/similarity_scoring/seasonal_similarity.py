@@ -37,6 +37,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
 
 class SeasonalSimilarity:
     def __init__(self, df, numeric_columns=None, string_columns=None):
@@ -54,6 +56,7 @@ class SeasonalSimilarity:
         self.columns = df.columns
         self.filter = DF_Filter()
         self.calculate = Calculate(self.numeric_columns, self.string_columns)
+        self.plot = Plot(self.df)
 
     def seasonal_similarity(self, start_year, end_year, months):
         df = self.filter.filter(self.df, start_year, end_year, months)
@@ -89,12 +92,7 @@ class SeasonalSimilarity:
 
         new_df = pd.DataFrame(results)
         return new_df
-    
-    def plot(self, df, metric):
-        plt.figure(figsize=(10, 6))
-        plt.title(f'{metric} similarity')
-        sns.heatmap(df.select_dtypes(include='number').columns, annot = False)
-        plt.show()
+
 
 
 
@@ -130,4 +128,39 @@ class Calculate:
     def kl_divergence(self, df1, df2):
         score = scipy.stats.entropy(df1, df2)
         return score
+
+class Plot:
+    def __init__(self, df):
+        self.df = df
+        self.fig = plt.figure()
+        self.figs = []
+
+    def heatmap(self, metric, title):
+        self.fig = go.Figure(data=go.Heatmap(
+            x=self.df['Year1'],  
+            y=self.df['Year2'],  
+            z=self.df[metric],  
+            colorscale='Viridis',  
+        ))
+        self.fig.update_layout(
+            title= title + metric,
+            xaxis_title='Year 1',
+            yaxis_title='Year 2',
+        )
+        self.fig.show()
+
+    def save(self, path):
+        self.fig.write_html(path)
+
+    def get_fig(self):
+        return self.fig
+    
+    def all(self, metrics, title):
+        for metric in metrics:
+            self.heatmap(metric, title)
+            self.figs.append(self.fig)
+    
+    def save_all(self, path):
+        for i, fig in enumerate(self.figs):
+            fig.write_html(path + fig.layout.title.text + '.html')
 
