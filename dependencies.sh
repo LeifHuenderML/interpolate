@@ -1,4 +1,4 @@
-pip3 install matplotlib pandas numpy openpyxl plotly seaborn
+pip3 install matplotlib pandas numpy openpyxl plotly seaborn nbformat
 conda install scikit-learn
 conda install -c anaconda cudatoolkit -y
 conda install pytorch-cuda=12.1 -c pytorch -c nvidia -y

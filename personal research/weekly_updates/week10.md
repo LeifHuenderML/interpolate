@@ -39,6 +39,10 @@
 - created the ipynbs for touch svm.ipynb gpr.ipynb descision_trees.ipynb rndm_forest.ipynb xg_boost.ipynb kNN.ipynb naive_bayes.ipynb
 - fixed a memory + space issue with the repo
 - i realized that my similarity scores data is not very well labeled, so i will need to go back and relabel the data
+- built the [sim_score_and_yield_05_23_24](../../data/pecan/sim_score_and_yield_05_23_24.csv) dataset
+- started testing the quality of predictions from the dataset above using a svm but the results were not very good
+- i will need to go back and think of a better way to get infomration from the similarity scores
+
 
 
 # Next Week's Outline For 
