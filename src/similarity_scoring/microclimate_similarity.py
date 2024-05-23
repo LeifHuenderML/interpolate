@@ -37,6 +37,11 @@ from scipy import stats
 import seaborn as sns
 import os
 from collections import namedtuple
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from data_manipulation.df_filter import DF_Filter
 
 
@@ -111,12 +116,17 @@ class Similarity:
     """
     
 
-    def __init__(self, df1, df2, df3, df4, numeric_columns=None, string_columns=None):
+    def __init__(self, df1, df2, df3, df4, df1_title, df2_title, df3_title, df4_title, numeric_columns=None, string_columns=None):
         #assign inputs
         self.df1 = df1
         self.df2 = df2
         self.df3 = df3
         self.df4 = df4
+        self.df1_title = df1_title
+        self.df2_title = df2_title
+        self.df3_title = df3_title
+        self.df4_title = df4_title
+
         #assign columns
         if numeric_columns is None:
             self.numeric_columns = ['lat', 'lon', 'temp', 'dew_point', 'feels_like', 'temp_min', 'temp_max', 'pressure', 'humidity', 'wind_speed', 'wind_deg', 'clouds_all', 'weather_id']
@@ -318,7 +328,7 @@ class Similarity:
                 dist_24 = distance.euclidean(self.df2[col], self.df4[col])
                 dist_34 = distance.euclidean(self.df3[col], self.df4[col])
 
-                euclid_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                euclid_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return euclid_similarities
     
@@ -336,7 +346,7 @@ class Similarity:
                 dist_24 = distance.cityblock(self.df2[col], self.df4[col])
                 dist_34 = distance.cityblock(self.df3[col], self.df4[col])
 
-                manhattan_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                manhattan_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return manhattan_similarities
     
@@ -354,7 +364,7 @@ class Similarity:
                 dist_24, _ = stats.pearsonr(self.df2[col], self.df4[col])
                 dist_34, _ = stats.pearsonr(self.df3[col], self.df4[col])
 
-                pearson_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                pearson_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return pearson_similarities
     
@@ -372,7 +382,7 @@ class Similarity:
                 dist_24, _ = stats.spearmanr(self.df2[col], self.df4[col])
                 dist_34, _ = stats.spearmanr(self.df3[col], self.df4[col])
 
-                spearman_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                spearman_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return spearman_similarities
 
@@ -390,7 +400,7 @@ class Similarity:
                 dist_24 = stats.kendalltau(self.df2[col], self.df4[col])
                 dist_34 = stats.kendalltau(self.df3[col], self.df4[col])
 
-                kendall_tau_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                kendall_tau_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return kendall_tau_similarities
 
@@ -409,7 +419,7 @@ class Similarity:
                 dist_24 = cosine_similarity([self.df2[col].values], [self.df4[col].values])
                 dist_34 = cosine_similarity([self.df3[col].values], [self.df4[col].values])
 
-                cosine_similarities[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                cosine_similarities[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
 
         return cosine_similarities
     
@@ -425,7 +435,7 @@ class Similarity:
                 dist_24 = scipy.stats.entropy(self.df1[col], self.df2[col])
                 dist_34 = scipy.stats.entropy(self.df1[col], self.df2[col])
 
-                kl_divergence_similariteies[col] = {'df1-df2': dist_12, 'df1-df3': dist_13, 'df1-df4': dist_14, 'df2-df3': dist_23, 'df2-df4': dist_24, 'df3-df4': dist_34}
+                kl_divergence_similariteies[col] = {str(self.df1_title + "-" + self.df2_title): dist_12, str(self.df1_title + "-" + self.df3_title): dist_13, str(self.df1_title + "-" + self.df4_title): dist_14, str(self.df2_title + "-" + self.df3_title): dist_23, str(self.df2_title + "-" + self.df4_title): dist_24, str(self.df3_title + "-" + self.df4_title): dist_34}
         return kl_divergence_similariteies
     
 

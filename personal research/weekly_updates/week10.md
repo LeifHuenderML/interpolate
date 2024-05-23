@@ -37,6 +37,8 @@
 - added dates to the datasets for easier tracking
 - added a readme to the datasets folder to make it easier to navigate
 - created the ipynbs for touch svm.ipynb gpr.ipynb descision_trees.ipynb rndm_forest.ipynb xg_boost.ipynb kNN.ipynb naive_bayes.ipynb
+- fixed a memory + space issue with the repo
+- i realized that my similarity scores data is not very well labeled, so i will need to go back and relabel the data
 
 
 # Next Week's Outline For 
