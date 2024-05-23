@@ -1,1 +1,0 @@
-Mainly worked on the abstract and getting the datafram slicer functions built.
