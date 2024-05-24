@@ -55,5 +55,9 @@
 - then i can think of a way to reduce the dimensionality of the data to see if that will improve the predictive ability of the model
 - built and trained a lstm on weather sequences to output the yield, the results are not yet confirmed but look better than the sim scores by a 97% improvemnent
 
+## Friday:
+- started the day by writing a parralel processing function to train the lstms on to find the best hyperparameters faster
+- added an early stopping callback to the lstm to stop training when the validation loss stops decreasing
+
 
 # Next Week's Outline For 
