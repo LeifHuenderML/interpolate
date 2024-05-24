@@ -32,7 +32,13 @@
 
 # Summary
 
-## Monday: 
+## Tuesday:
+- was at moscows campus all day geting filled in on the summer research fellowship
+
+## Wednesday:
+- completed the CITI training
+
+## Thursday: 
 - started in the morning by cleaning up the repo to make it easier to navigate
 - added dates to the datasets for easier tracking
 - added a readme to the datasets folder to make it easier to navigate
@@ -41,8 +47,12 @@
 - i realized that my similarity scores data is not very well labeled, so i will need to go back and relabel the data
 - built the [sim_score_and_yield_05_23_24](../../data/pecan/sim_score_and_yield_05_23_24.csv) dataset
 - started testing the quality of predictions from the dataset above using a svm but the results were not very good
-- i will need to go back and think of a better way to get infomration from the similarity scores
-
+- i then created a xgboost model and the results were slightly better but not very impressive
+- inside the svm.ipynb is where i created the dataset of sim scores and yield
+- i created a dummy model that just predicts the average of the yield for the training data, and the results were not very good at a mse of 484
+- then testing that up against the xgboost model, the mse was 478 so there was slight improvement but not very impressive
+- i think now what i want to do is to train a larger sequential model so to see if there is stronger predicitve ability from the larger model
+- then i can think of a way to reduce the dimensionality of the data to see if that will improve the predictive ability of the model
 
 
 # Next Week's Outline For 
