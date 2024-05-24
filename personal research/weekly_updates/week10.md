@@ -53,6 +53,7 @@
 - then testing that up against the xgboost model, the mse was 478 so there was slight improvement but not very impressive
 - i think now what i want to do is to train a larger sequential model so to see if there is stronger predicitve ability from the larger model
 - then i can think of a way to reduce the dimensionality of the data to see if that will improve the predictive ability of the model
+- built and trained a lstm on weather sequences to output the yield, the results are not yet confirmed but look better than the sim scores by a 97% improvemnent
 
 
 # Next Week's Outline For 
