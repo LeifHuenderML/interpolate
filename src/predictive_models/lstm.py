@@ -1,4 +1,5 @@
 # load libraries
+import json
 import torch
 import queue
 import threading
@@ -23,6 +24,8 @@ class LSTM(nn.Module):
 
         self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
         self.fc = nn.Linear(hidden_size, 1)
+        
+        self.activations = []
         #member vars for the early stopper
         self.patience = patience
         self.min_delta = min_delta
@@ -34,6 +37,7 @@ class LSTM(nn.Module):
         c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
         out, _ = self.lstm(x, (h0, c0))
         out = self.fc(out[:, -1, :])
+        self.activations.append(out.squeeze())
         return out.squeeze()
 
     def early_stop(self, validation_loss):
@@ -145,10 +149,6 @@ class GridSearch():
                         iterations += 1
                         self.display_iterations(iterations)
 
-        result = self.make_results()                       
-        # q.put(result)
-        return(result)
-
     
     def test_model(self, model):
         model.eval()
@@ -181,6 +181,9 @@ class GridSearch():
                 'criterion' : crit,
                 'lr' : lr
             }
+            result = self.make_results()
+            self.save_results(result)
+
         return best_mape
     
     def make_results(self,):
@@ -191,6 +194,13 @@ class GridSearch():
             'hyperparameters' : self.best_hyperparams
         }
     
+    def save_results(self, results):
+        hyperparameters = results['hyperparameters']
+        loss_fn_name = hyperparameters['criterion'].__class__.__name__
+        hyperparameters['criterion'] = loss_fn_name
+        with open('lstm_hyperparameters.json', 'w') as f:
+            json.dump(hyperparameters, f)
+            
     def display_iterations(self, iterations):
         if iterations % 100 == 0:
             print("#"*100)

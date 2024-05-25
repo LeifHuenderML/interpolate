@@ -1,5 +1,6 @@
 import time
 import lstm
+import json
 import torch
 import queue
 import threading
@@ -37,6 +38,7 @@ num_layers = [1, 2, 3, 4, 5, 6,]
 criterion = [nn.MSELoss(), nn.L1Loss(), nn.HuberLoss(), nn.SmoothL1Loss()]
 lr = [1, 0.3, 0.1, 0.03, 0.01, 0.001,]
 
+
 hyperparameters = {
     'hidden_size' : hidden_size,
     'num_layers' : num_layers,
@@ -50,6 +52,9 @@ print("Device set to:", device)
 
 grid_search = lstm.GridSearch(hyperparameters, 3, train_loader, val_loader, test_loader, device)
 start= time.time()
-results = grid_search.search(hyperparameters)
+grid_search.search(hyperparameters)
+
+
+
 with open('lstm_training_time.txt', 'w') as f:
-    f.write(time.time() - start)
+    f.write(str(time.time() - start))
