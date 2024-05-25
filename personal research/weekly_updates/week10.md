@@ -58,6 +58,10 @@
 ## Friday:
 - started the day by writing a parralel processing function to train the lstms on to find the best hyperparameters faster
 - added an early stopping callback to the lstm to stop training when the validation loss stops decreasing
-
+- ran into difficulty tying to get the parallel processing to work, so i will need to come back to that later if need be
+- i created a nice semi modular framework for training and testing lstms over a ranges of hyperparameters
+- i began training the lstm script to find the best model from 864 different models, which will take a while to train
+- the results are allraedy looking promising with the best model so far having a mape of 6%
+- 
 
 # Next Week's Outline For 
