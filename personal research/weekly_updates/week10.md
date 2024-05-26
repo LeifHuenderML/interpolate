@@ -75,7 +75,8 @@
 - got finished with the introduction 
 - started on writing the methodologies 
 - wrote the data sources and prepearation
-- created a new notebook c
+- created a new notebook for makeing the first graph of the paper called [new mexicon pecan yield vis](../../src/data_visualization/new_mexico_pecan_yield_visualization.ipynb)
+- finished writing the majority of the data secson for the paper
 
 
 # Next Week's Outline For 

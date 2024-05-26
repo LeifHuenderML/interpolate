@@ -25,7 +25,13 @@ This research is still in its early stages, yet it shows promise for enhancing f
 
 ### Data Source and Description
 
-For this study the data was obtained from two locations. For all crop yield data for Pecans in the 4 described regions in New Mexico we obtained the data frrom https://quickstats.nass.usda.gov/ where there is county-level agricultural yield data for various crops on an annual basis. For all of the meteorological data we utilized the Open Weather API at https://openweathermap.org/api. This API provides extensive information on an hourly update for many key features. The features analyzed for our models purpose included: lattitude, longitude, dew point, percieved temperature, minimum temperature, maximum temperature, humidity, wind speed, wind degree, cloud cover, and weather id. For this study we selected 4 locations in New Mexico: Dona Ana, Chaves, Sierra, and Otero. These four locations were selected on the basis that they contained the longest spannning yield information for pecan yield. See graph below. ![graph](number_of_entries_by_new_mexico_count.png). 
+For this study the data was obtained from two locations. For all crop yield data for Pecans in the 4 described regions in New Mexico we obtained the data frrom https://quickstats.nass.usda.gov/ where there is county-level agricultural yield data for various crops on an annual basis. For all of the meteorological data we utilized the Open Weather API at https://openweathermap.org/api. This API provides extensive information on an hourly update for many key features. The features analyzed for our models purpose included: lattitude, longitude, dew point, percieved temperature, minimum temperature, maximum temperature, humidity, wind speed, wind degree, cloud cover, and weather id. For this study we selected 4 locations in New Mexico: Dona Ana, Chaves, Sierra, and Otero. These four locations were selected on the basis that they contained the longest spannning yield information for pecan yield. See graph below. ![graph](number_of_entries_by_new_mexico_count.png). From the graph we can see that there are 7 entries for Dona Ana, 6 for Chaves, 5 for Sierra, and 4 for Otero totalling to 22 entries. 
+
+### Data Preperation
+
+In order to get actionable insights special care must be taken for aligning the 4 weather streams (S_1, S_2, S_3, S_4) temporally. Even being off by one day could cause dramatic changes in similarity scores betwen S1-S4. There were also several features in the weather data that did not meet a threshold of having at minimum 60% of the data filled in these were removed from the dataset. The features that were removed include: visibility, wind gust, rain 1h, rain 3h, snow 1h, snow 3h. For the yield dataset the only relevant columns that were needed were the county and the yield measured in lb/acre. 
+
+write about the other datasets used in combitnation fort the snn and the lstm 
 
 
 
