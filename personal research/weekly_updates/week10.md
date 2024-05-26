@@ -62,6 +62,20 @@
 - i created a nice semi modular framework for training and testing lstms over a ranges of hyperparameters
 - i began training the lstm script to find the best model from 864 different models, which will take a while to train
 - the results are allraedy looking promising with the best model so far having a mape of 6%
-- 
+
+
+## Saturday:
+- Training the lstms models completed 
+- i found the best lstm to have a input size of 128, i trained it on 32 feature sequences in batches of 32, 
+- the model perfomed better than the sim scores model that i have tested so far with the sim scores model having a rmse of 484 and the lstm having a rmse of 145 suggesting a 70% improvement in predictive ability
+- i wend through an created some visualiztions of the lstm
+- i began working on outlining the paper, i know there will need to be more work done on the sim scores for it
+- i still need to think  more about how i can use sim scores in a valuable way, or if there even is a way to use them.
+- Started writing the paper
+- got finished with the introduction 
+- started on writing the methodologies 
+- wrote the data sources and prepearation
+- created a new notebook c
+
 
 # Next Week's Outline For 
