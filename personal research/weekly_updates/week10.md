@@ -82,4 +82,7 @@
 - idea: is to craete sim scores for each day baset on location taht compares to each others location but instead of it being 6 dims it is 3 ie location of the yield output with a sim score against other location 1 -3 
 - idea: second sim score model is to increase dimensionality by addind the 3 dims to that days weather data and train another model with that
 - todo add readme for valley data 
+- i started off by gathering the data for the valley feaver so  that we can start aquiring that weather data, i think that it would be best to get as much data as possible especially since i have a research budget for it
+- i then continued writning the paper for my research i finished writing the first draft for the data preperation, i also wrote the first draft for the similarity scoring
+- i created a new datavisualization notebook that created a heatmap of the similarity scores
 # Next Week's Outline For 
