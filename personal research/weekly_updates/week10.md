@@ -78,5 +78,8 @@
 - created a new notebook for makeing the first graph of the paper called [new mexicon pecan yield vis](../../src/data_visualization/new_mexico_pecan_yield_visualization.ipynb)
 - finished writing the majority of the data secson for the paper
 
-
+## Sunday:
+- idea: is to craete sim scores for each day baset on location taht compares to each others location but instead of it being 6 dims it is 3 ie location of the yield output with a sim score against other location 1 -3 
+- idea: second sim score model is to increase dimensionality by addind the 3 dims to that days weather data and train another model with that
+- todo add readme for valley data 
 # Next Week's Outline For 
