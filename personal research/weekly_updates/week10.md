@@ -84,5 +84,6 @@
 - todo add readme for valley data 
 - i started off by gathering the data for the valley feaver so  that we can start aquiring that weather data, i think that it would be best to get as much data as possible especially since i have a research budget for it
 - i then continued writning the paper for my research i finished writing the first draft for the data preperation, i also wrote the first draft for the similarity scoring
-- i created a new datavisualization notebook that created a heatmap of the similarity scores
+- i created a new datavisualization notebook that created a heatmap of the similarity scores matching the color theme of the paper
+
 # Next Week's Outline For 
