@@ -106,3 +106,6 @@
 - includ the adknowledgements 
 - format the paper
 - edit it like crazy 
+
+
+- propose for the next weeks of research to pivon to doing a study of th evallyey feaver the research question should be "can meteorological temporal data combinede with state of the art machine learning methods be used to predict early signs of valley fever cases' propose to use a lstm of transformer  to train on the weather data to then predict valley fever cases.
