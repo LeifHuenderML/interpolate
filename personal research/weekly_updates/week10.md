@@ -86,4 +86,23 @@
 - i then continued writning the paper for my research i finished writing the first draft for the data preperation, i also wrote the first draft for the similarity scoring
 - i created a new datavisualization notebook that created a heatmap of the similarity scores matching the color theme of the paper
 
+## Monday: 
+- created some more visualizations for the paper
+- wrote the rest of the data prep for the paper
+- worte the similarity analysis for the paper
+- wrote the baseilen regressor for the paper 
+- wrote the mlp regressor for the paper
+- wote the xgboost fo the paper
+- wrote the lstm for the paper
+- worte the results 
+- wrote the contluction 
+- trained anothe nn on dataset 4 for the paper
+- trained another lstm on dataset 4 for the paper
+- trained xgboost on dataset 4 for the paper
+- organized the codebase some 
+
 # Next Week's Outline For 
+- include all references into the paper
+- includ the adknowledgements 
+- format the paper
+- edit it like crazy 
